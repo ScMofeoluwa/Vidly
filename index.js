@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
+const error = require("./middleware/error");
 const genres = require("./routes/genres");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
@@ -28,6 +29,8 @@ app.use("/api/auth", auth);
 app.use("/api/customers", customers);
 app.use("/api/movies", movies);
 app.use("/api/rentals", rentals);
+
+app.use(error);
 
 const port = process.env.PORT || 2000;
 app.listen(port, () => console.log(`Listening on ${port}...`));
